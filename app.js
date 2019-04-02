@@ -21,12 +21,16 @@ app.use(express.urlencoded({extended: true}));
 //Set EJS Templete Engine
 app.set('view engine', 'ejs');
 
+//----- POSTS DB ------//
+let posts = [];
+
 //----- ROUTES ------//
 
 //Index - GET
 app.get("/", function(req, res) {
   res.render("home", {
-    homeContent: homeStartingContent
+    homeContent: homeStartingContent,
+    posts: posts
   });
 });
 
@@ -58,7 +62,11 @@ app.post("/compose", function(req, res) {
     content: req.body.content
   };
 
-  res.send(post);
+  //Push post into Posts DB array
+  posts.push(post);
+
+  //Redirect to Index
+  res.redirect("/");
 });
 
 //----- SERVER ------//
