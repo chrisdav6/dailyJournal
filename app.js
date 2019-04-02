@@ -51,8 +51,8 @@ app.get("/compose", function(req, res) {
 
 //Compose - POST
 app.post("/compose", function(req, res) {
-  let { content } = req.body;
-  res.send(content);
+  let { title, content } = req.body;
+  res.send(`${title} - ${content}`);
 });
 
 //----- SERVER ------//

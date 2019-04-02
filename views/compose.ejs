@@ -1,20 +1,20 @@
 <% include partials/header.ejs %>
   
 <div class="container mt-5">
-  <h1>Compose</h1>
+  <h1 class="mb-5">Compose</h1>
   
-  <div class="row mt-5">
-    <div class="col-md-6 mr-auto">
-      <form action="/compose" method="post">
-        <div class="input-group">
-          <input type="text" class="form-control" name="content" placeholder="Content">
-          <div class="input-group-append">
-            <button class="btn btn-outline-dark" type="submit">Compose</button>
-          </div>
-        </div>        
-      </form>
+  <form action="/compose" method="post">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input class="form-control form-control-lg" type="text" name="title" id="title" placeholder="Enter Title">
     </div>
-  </div>
+    <div class="form-group">
+      <label for="content">Content</label>
+      <textarea class="form-control form-control-lg" name="content" id="content" rows="5" placeholder="Your Content"></textarea>
+    </div>
+    <button class="btn btn-dark btn-lg">Publish</button> 
+  </form>
+
 </div>
   
 <% include partials/footer.ejs %>
