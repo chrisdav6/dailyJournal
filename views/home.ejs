@@ -4,8 +4,10 @@
   <h1 class="mb-5">Home</h1>
   <p><%= homeContent %></p>
 
-  <h1 class="mt-5">Posts</h1>
-  <hr>
+  <% if(posts.length !== 0) { %>
+    <h1 class="mt-5">Posts</h1>
+    <hr>
+  <% } %>
 
   <% posts.forEach(function(post) { %>
     <div class="p-2">
