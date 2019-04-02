@@ -62,11 +62,14 @@ app.post("/compose", function(req, res) {
     content: req.body.content
   };
 
-  //Push post into Posts DB array
-  posts.push(post);
+  //Make sure post data is not blank
+  if(post.title.length !== 0 && post.content.length !== 0) {
+    //Push post into Posts DB array
+    posts.push(post);
 
-  //Redirect to Index
-  res.redirect("/");
+    //Redirect to Index
+    res.redirect("/");
+  }
 });
 
 //----- SERVER ------//
