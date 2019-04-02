@@ -51,8 +51,14 @@ app.get("/compose", function(req, res) {
 
 //Compose - POST
 app.post("/compose", function(req, res) {
-  let { title, content } = req.body;
-  res.send(`${title} - ${content}`);
+
+  //Grab form data and store in an Object
+  const post = {
+    title: req.body.title,
+    content: req.body.content
+  };
+
+  res.send(post);
 });
 
 //----- SERVER ------//
