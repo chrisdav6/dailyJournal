@@ -49,6 +49,12 @@ app.get("/compose", function(req, res) {
   res.render("compose");
 });
 
+//Compose - POST
+app.post("/compose", function(req, res) {
+  let { content } = req.body;
+  res.send(content);
+});
+
 //----- SERVER ------//
 
 //Start Server
