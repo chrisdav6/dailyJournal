@@ -17,6 +17,16 @@
     color: #1abc9c !important;
 }
 
+.my-btn {
+    background: #1ABC9C;
+    color: #fff;
+    transition: background .3s;
+}
+
+.my-btn:hover {
+    background: rgb(32, 153, 129);
+}
+
 .footer {
 	position: absolute;
 	text-align: center;
