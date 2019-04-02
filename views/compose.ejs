@@ -1,0 +1,21 @@
+<% include partials/header.ejs %>
+  
+<div class="container mt-5">
+  <h1>Compose</h1>
+  
+  <div class="row mt-5">
+    <div class="col-md-6 mr-auto">
+      <form action="/compose" method="post">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Content">
+          <div class="input-group-append">
+            <button class="btn btn-outline-dark" type="submit">Compose</button>
+          </div>
+        </div>        
+      </form>
+    </div>
+  </div>
+</div>
+  
+<% include partials/footer.ejs %>
+
