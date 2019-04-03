@@ -53,6 +53,25 @@ app.get("/compose", function(req, res) {
   res.render("compose");
 });
 
+//Single Post - GET
+app.get("/posts/:postName", function(req, res) {
+  
+  //Store route parameter from url in variable
+  let query = req.params.postName;
+
+  //Loop through posts and look for match
+  posts.forEach(function(foundPost) {
+    const storedTitle = foundPost.title;
+
+    //If match found render post
+    if(storedTitle.toLowerCase() == query.toLowerCase()) {
+      res.render("post", {
+        foundPost: foundPost
+      });
+    }
+  });
+});
+
 //Compose - POST
 app.post("/compose", function(req, res) {
 
