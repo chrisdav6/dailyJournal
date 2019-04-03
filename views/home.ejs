@@ -17,7 +17,7 @@
   <% posts.forEach(function(post) { %>
     <div class="post">
       <h3><a class="text-dark" href="/posts/<%= post.title %>"><%= post.title %></a></h3>
-      <p class="lead"><%= post.content %></p>
+      <p class="lead"><%= post.content.substring(0, 100) + `...` %></p>
     </div>
   <% }); %>
 </div><!-- /container -->
