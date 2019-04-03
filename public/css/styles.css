@@ -36,12 +36,12 @@ body {
 .footer {
     text-align: center;
     margin-top: auto;
-	height: 60px;
+	padding: 1.5em 0;
 	background-color: #1abc9c;
 }
 
 .footer p {
-    margin-top: 25px;
 	font-size: 12px;
     color: #fff;
+    margin-bottom: 0;
 }
