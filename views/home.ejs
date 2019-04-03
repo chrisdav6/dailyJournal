@@ -1,8 +1,12 @@
 <% include partials/header.ejs %>
   
 <div class="container mt-5">
-  <h1 class="mb-5">Home</h1>
-  <p><%= homeContent %></p>
+  <div class="d-flex flex-row align-items-center justify-content-between">
+    <h1>Home</h1>
+    <a class="btn btn-outline-dark" href="/compose">Compose Post</a>
+  </div>
+  <hr>
+  <p class="lead"><%= homeContent %></p>
 
   <% if(posts.length !== 0) { %>
   <div class="mt-5 d-flex flex-row align-items-center justify-content-between">
@@ -11,7 +15,7 @@
       <button class="btn btn-outline-dark clearPosts" type="submit">Clear All Posts</button>
     </form>
   </div>
-  <hr class="mt-0 mb-4">
+  <hr>
   <% } %>
 
   <% posts.forEach(function(post) { %>
