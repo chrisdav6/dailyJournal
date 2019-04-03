@@ -72,6 +72,16 @@ app.post("/compose", function(req, res) {
   }
 });
 
+//Clear Posts - POST
+app.post("/clearPosts", function(req, res) {
+
+  //Clear Post DB array
+  posts = [];
+
+  //Redirect to Index
+  res.redirect("/");
+});
+
 //----- SERVER ------//
 
 //Start Server

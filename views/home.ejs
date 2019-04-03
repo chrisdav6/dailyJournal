@@ -5,8 +5,13 @@
   <p><%= homeContent %></p>
 
   <% if(posts.length !== 0) { %>
-    <h1 class="mt-5">Posts</h1>
-    <hr>
+  <div class="mt-5 d-flex flex-row align-items-center justify-content-between">
+    <h1>Posts</h1>
+    <form action="/clearPosts" method="post">
+      <button class="btn btn-outline-dark clearPosts" type="submit">Clear All Posts</button>
+    </form>
+  </div>
+  <hr class="mt-0">
   <% } %>
 
   <% posts.forEach(function(post) { %>
