@@ -11,11 +11,11 @@
       <button class="btn btn-outline-dark clearPosts" type="submit">Clear All Posts</button>
     </form>
   </div>
-  <hr class="mt-0">
+  <hr class="mt-0 mb-4">
   <% } %>
 
   <% posts.forEach(function(post) { %>
-    <div class="p-2">
+    <div class="post">
       <h3><%= post.title %></h3>
       <p class="lead"><%=post.content %></p>
     </div>

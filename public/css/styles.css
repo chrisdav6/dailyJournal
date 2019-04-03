@@ -33,6 +33,12 @@ body {
     background: rgb(32, 153, 129);
 }
 
+.post {
+    margin: 1em 0 1em 1em;
+    padding-left: 1em;
+    border-left: 1px solid rgb(208, 209, 211);
+}
+
 .footer {
     text-align: center;
     margin-top: auto;
