@@ -1,5 +1,7 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const helmet = require("helmet");
+const Post = require("./models/Post");
 const port = process.env.PORT || 3000;
 const app = express();
 
@@ -21,16 +23,24 @@ app.use(express.urlencoded({extended: true}));
 //Set EJS Templete Engine
 app.set('view engine', 'ejs');
 
-//----- POSTS DB ------//
-let posts = [];
+//----- Mongo DB ------//
+mongoose.connect("mongodb://localhost:27017/dailyJournalDB", {useNewUrlParser: true}, function() {
+  console.log("Connected to Mongo DB");
+});
 
 //----- ROUTES ------//
 
 //Index - GET
 app.get("/", function(req, res) {
-  res.render("home", {
-    homeContent: homeStartingContent,
-    posts: posts
+  Post.find({}, function(err, foundPosts) {
+    if(err) {
+      res.send(err);
+    }
+
+    res.render("home", {
+      homeContent: homeStartingContent,
+      posts: foundPosts
+    });
   });
 });
 
@@ -80,6 +90,18 @@ app.post("/compose", function(req, res) {
     title: req.body.title,
     content: req.body.content
   };
+
+  //Create New Post
+  const post = new Post(post);
+  
+  //Save post to DB
+  post.save(function(err, savedPost) {
+    if(err) {
+      res.send(err);
+    }
+    console.log(`Saved Post ${savedPost.title}`);
+    res.redirect("/");
+  });
 
   //Make sure post data is not blank
   if(post.title.length !== 0 && post.content.length !== 0) {
