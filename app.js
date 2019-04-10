@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
 const Post = require("./models/Post");
+const dotenv = require('dotenv').config();
 const port = process.env.PORT || 3000;
 const app = express();
 
@@ -24,7 +25,7 @@ app.use(express.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
 
 //----- Mongo DB ------//
-mongoose.connect("mongodb://localhost:27017/dailyJournalDB", {useNewUrlParser: true}, function() {
+mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds119302.mlab.com:19302/daily-journal`, {useNewUrlParser: true}, function() {
   console.log("Connected to Mongo DB");
 });
 
@@ -69,17 +70,25 @@ app.get("/posts/:postName", function(req, res) {
   //Store route parameter from url in variable
   let query = req.params.postName;
 
-  //Loop through posts and look for match
-  posts.forEach(function(foundPost) {
-    const storedTitle = foundPost.title;
-
-    //If match found render post
-    if(storedTitle.toLowerCase() == query.toLowerCase()) {
-      res.render("post", {
-        foundPost: foundPost
-      });
+  Post.find({}, function(err, posts) {
+    if(err) {
+      res.send(err);
     }
+
+    //Loop through posts and look for match
+    posts.forEach(function(foundPost) {
+      const storedTitle = foundPost.title;
+
+      //If match found render post
+      if(storedTitle.toLowerCase() == query.toLowerCase()) {
+        res.render("post", {
+          foundPost: foundPost
+        });
+      }
+    });
+
   });
+  
 });
 
 //Compose - POST
@@ -87,40 +96,34 @@ app.post("/compose", function(req, res) {
 
   //Grab form data and store in an Object
   const post = {
-    title: req.body.title,
+    title: req.body.title.trim(),
     content: req.body.content
   };
 
   //Create New Post
-  const post = new Post(post);
+  const newPost = new Post(post);
   
   //Save post to DB
-  post.save(function(err, savedPost) {
+  newPost.save(function(err, savedPost) {
     if(err) {
       res.send(err);
     }
     console.log(`Saved Post ${savedPost.title}`);
     res.redirect("/");
   });
-
-  //Make sure post data is not blank
-  if(post.title.length !== 0 && post.content.length !== 0) {
-    //Push post into Posts DB array
-    posts.push(post);
-
-    //Redirect to Index
-    res.redirect("/");
-  }
 });
 
-//Clear Posts - POST
-app.post("/clearPosts", function(req, res) {
-
-  //Clear Post DB array
-  posts = [];
-
-  //Redirect to Index
-  res.redirect("/");
+//Delete - POST (Delete Post)
+app.post("/delete", function(req, res) {
+  const { postToDelete } = req.body;
+  
+  Post.findByIdAndRemove(postToDelete, function(err, deletedPost) {
+    if(err) {
+      res.send(err);
+    }
+    console.log(`Removed ${deletedPost.title}`);
+    res.redirect("/");
+  });
 });
 
 //----- SERVER ------//

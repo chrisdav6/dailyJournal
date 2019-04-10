@@ -9,11 +9,8 @@
   <p class="lead"><%= homeContent %></p>
 
   <% if(posts.length !== 0) { %>
-  <div class="mt-5 d-flex flex-row align-items-center justify-content-between">
+  <div class="mt-5">
     <h1>Posts</h1>
-    <form action="/clearPosts" method="post">
-      <button class="btn btn-outline-dark clearPosts" type="submit">Clear All Posts</button>
-    </form>
   </div>
   <hr>
   <% } %>
@@ -26,7 +23,6 @@
     <% } else { %>
       <p class="lead"><%= post.content %></p>
     <% } %>
-    
   </div>
   <% }); %>
 </div><!-- /container -->

@@ -7,6 +7,10 @@
   <div class="post my-5">
     <h3><%= foundPost.title %></h3>
     <p class="lead"><%= foundPost.content %></p>
+    <form action="/delete" method="post">
+      <button class="btn btn-outline-danger btn-sm" type="submit">Delete Post</button>
+      <input type="hidden" name="postToDelete" value="<%= foundPost._id %>">
+    </form>
   </div>
 
   <hr>
